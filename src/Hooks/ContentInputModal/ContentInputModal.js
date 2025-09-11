@@ -5,6 +5,7 @@ import { useState } from "react";
 import Button from "../../Components/Button";
 import Modal from 'react-native-modal';
 import { launchImageLibrary } from "react-native-image-picker";
+import { getAuth } from "@react-native-firebase/auth";
 
 
 function ContentInputModal({ visible, onClose, onSend }) {
@@ -13,6 +14,9 @@ function ContentInputModal({ visible, onClose, onSend }) {
   const [price, setPrice] = useState()
   const [imageUri, setImageUri] = useState([]);
   const [debugInfo, setDebugInfo] = useState(null);
+
+  const userEmail = getAuth().currentUser.email
+  console.log(userEmail)
 
 
 
@@ -116,7 +120,7 @@ function ContentInputModal({ visible, onClose, onSend }) {
 
 
         <Button buttonText={'Foto sec'} theme={"primary"} onPress={selectImages} />
-        <Button buttonText={'Create new habit'} theme={"primary"} onPress={() => onSend(name, price, imageUri)} />
+        <Button buttonText={'Create new habit'} theme={"primary"} onPress={() => onSend(name, price, imageUri, userEmail)} />
       </View>
     </Modal>
   )

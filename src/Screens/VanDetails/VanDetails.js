@@ -31,12 +31,13 @@ const VanDetails = ({ route }) => {
         setOfferVisible(!offerVisible)
     }
 
-    function saveOffer(vanOffer) {
-        const offers = {
+    function saveOffer(vanOffer, offerEmail) {
+        const Offers = {
             offer: vanOffer,
+            email : offerEmail
         }
         // database().ref(`Vans/${id}`).push(vanOffer) bu şekilde 
-        database().ref(`Vans/${id}/Offer`).push(vanOffer) //bu şekilde offer diye bir alt başlıl altında yapıyor
+        database().ref(`Vans/${id}/Offers`).push(Offers) //bu şekilde offer diye bir alt başlıl altında yapıyor
         handleInputToggle()
     }
 

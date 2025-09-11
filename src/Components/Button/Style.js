@@ -5,8 +5,15 @@ export default StyleSheet.create({
         backgroundColor : "white",
         textAlign : "center",
         borderWidth : 1,
-        borderRadius : 15,
-        padding : 12,
+        borderRadius : 25,
+        // borderColor : "grey",
+        borderColor : "#e6edf8",
+        padding : 13,
         margin : 5
+    },
+
+    image : {
+        width : 20,
+        height : 20
     }
 })

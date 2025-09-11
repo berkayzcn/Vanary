@@ -1,5 +1,3 @@
-
-
 import { NewAppScreen } from '@react-native/new-app-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -15,7 +13,8 @@ import { useEffect, useState } from 'react';
 import { getAuth } from '@react-native-firebase/auth';
 import Button from '../Components/Button';
 import VanDetails from './VanDetails';
-
+import Icon from "react-native-vector-icons/MaterialIcons";
+import FlashMessage from "react-native-flash-message";
 
 function App() {
 
@@ -76,17 +75,44 @@ function App() {
           name='Login'
           component={LogIn}
           options={{
-            headerShown: false
+            // headerShown: false,
+            headerTitle: "",
+            headerShadowVisible: false,
+            headerBackTitle: "",
+            // headerTintColor : "#192252",
+            headerTintColor: "grey",
+            headerBackImage: ({ tintColor }) => (
+              <Icon
+                name="arrow-back-ios-new"
+                size={24}
+                color={tintColor}
+                style={{ marginLeft: 22 }} // buradan padding/margin ayarlıyorsun
+              />
+            ),
+    
           }}
         />
         <Stack.Screen
           name='Signup'
           component={Signup}
-          options={{
-            headerShown: false
+           options={{
+            // headerShown: false,
+            headerTitle: "",
+            headerShadowVisible: false,
+            headerBackTitle: "",
+            // headerTintColor : "#192252",
+            headerTintColor: "grey",
+            headerBackImage: ({ tintColor }) => (
+              <Icon
+                name="arrow-back-ios-new"
+                size={24}
+                color={tintColor}
+                style={{ marginLeft: 22 }} // buradan padding/margin ayarlıyorsun
+              />
+            ),
+    
           }}
         />
-        {/* <Stack.Screen name="CreateAccount" component={CreateEmailAccount} /> */}
       </Stack.Navigator>
     )
   }
@@ -108,8 +134,10 @@ function App() {
           )
         }
 
-        <Stack.Screen name='VanDetails' component={VanDetails}/>
+        <Stack.Screen name='VanDetails' component={VanDetails} />
       </Stack.Navigator>
+      <FlashMessage position={"top"}/>
+
     </NavigationContainer>
   );
 }

@@ -6,11 +6,15 @@ import { useEffect, useState } from "react";
 import database from "@react-native-firebase/database"
 import useParseData from "../../Hooks/useParseData/useParseData";
 import storage from '@react-native-firebase/storage';
+import { getAuth } from "@react-native-firebase/auth";
 
 function Home({ navigation }) {
 
     const [inputModalVisible, setInputModalVisible] = useState()
     const [vans, setVans] = useState();
+
+    const userEmail = getAuth().currentUser.email 
+    // const userName = getAuth().currentUser.displayName
 
     useEffect(() => {
         const vansRef = database().ref('Vans')
@@ -33,13 +37,15 @@ function Home({ navigation }) {
         setInputModalVisible(!inputModalVisible)
     }
 
-    async function vanSave(vanTitle, vanPrice, base64Image) {
+    async function vanSave(vanTitle, vanPrice, base64Image, userEmail) {
+        
         try {
             // 2️⃣ Realtime Database objesi
             const newCaravan = {
                 title: vanTitle,
                 price: vanPrice,
                 photos: base64Image,
+                email : userEmail
                 // createdAt: database.ServerValue.TIMESTAMP,
             };
             // 3️⃣ Realtime Database’e kaydet
@@ -63,9 +69,10 @@ function Home({ navigation }) {
         return (
             <TouchableOpacity onPress={() => navigation.navigate("VanDetails", item.id)}>
                 <Card
-                    photos={item.photos}
-                    title={item.title}
-                    price={item.price}
+                    item={item}
+                    // photos={item.photos}
+                    // title={item.title}
+                    // price={item.price}
                 // onpress={toDetails(item.id)}
                 />
             </TouchableOpacity>
@@ -79,7 +86,7 @@ function Home({ navigation }) {
                 <Text>
                     Hello, Home Page
                 </Text>
-                <Card title={"Card"} price={12} />
+                {/* <Card title={"Card"} price={12} /> */}
                 <FlatList
                     data={vans}
                     renderItem={renderVans}

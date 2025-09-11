@@ -4,10 +4,14 @@ import Modal from "react-native-modal"
 import Input from "../../Components/Input"
 import Button from "../../Components/Button"
 import style from "./OfferModalStyle"
+import { getAuth } from "@react-native-firebase/auth"
 
-function OfferModal  ({ onClose, visible, onSend })  {
+function OfferModal({ onClose, visible, onSend }) {
 
     const [price, setPrice] = useState()
+    const userEmail = getAuth().currentUser.email
+    console.log(userEmail)
+
 
     return (
         <Modal
@@ -19,7 +23,7 @@ function OfferModal  ({ onClose, visible, onSend })  {
         >
             <View style={style.container}>
                 <Input placeholder={"Teklif Gir"} changeText={setPrice} />
-                <Button title={"Teklif Gönder"} onPress={()=>onSend(price)} />
+                <Button title={"Teklif Gönder"} onPress={() => onSend(price, userEmail)} />
             </View>
 
         </Modal>
