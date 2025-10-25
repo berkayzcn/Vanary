@@ -9,13 +9,16 @@ export default StyleSheet.create({
         // borderTopLeftRadius: 10,
         // borderTopRightRadius: 10,
         borderRadius : 10,
-        height: deviceSize.height / 3,
+        height: deviceSize.height / 2,
+        position : "static"
     },
 
 
     modal: {
       //  justifyContent: "flex-end",
-        margin: 10,
+        // marginVertical : 14,
+        marginHorizontal : 0,
+        top : 223
     },
 
     inputContainer: {

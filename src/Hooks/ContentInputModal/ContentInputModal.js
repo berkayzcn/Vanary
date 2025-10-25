@@ -12,8 +12,8 @@ function ContentInputModal({ visible, onClose, onSend }) {
 
   const [name, setName] = useState()
   const [price, setPrice] = useState()
-  const [imageUri, setImageUri] = useState([]);
-  const [debugInfo, setDebugInfo] = useState(null);
+  const [imageUri, setImageUri] = useState([]); //fotoğrafların URI’larını bir dizi olarak tutuyor
+  const [debugInfo, setDebugInfo] = useState(null); //otoğraflarla ilgili tüm raw veriyi JSON olarak tutuyor
 
   const userEmail = getAuth().currentUser.email
   console.log(userEmail)
@@ -40,14 +40,14 @@ function ContentInputModal({ visible, onClose, onSend }) {
       return;
     }
 
-    if (result.assets && result.assets.length > 0) {
+    if (result.assets && result.assets.length > 0) { 
       // Tüm gelen asset'leri logla
       // result.assets.forEach((asset, index) => {
       //   console.log(`➡️ Asset ${index}:`, asset);
       // });
 
       // Base64 string’leri al
-      const base64Images = result.assets
+      const base64Images = result.assets 
         .map(asset => asset.base64)
         .filter(Boolean);
 

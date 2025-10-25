@@ -4,11 +4,14 @@ import database from "@react-native-firebase/database";
 import DetailsCard from "../../Components/DetailsCard.js";
 import OfferModal from "../../Hooks/OfferModal/OfferModal.js";
 import Button from "../../Components/Button/Button.js";
+import { getAuth } from "@react-native-firebase/auth";
 
 const VanDetails = ({ route }) => {
     const id = route.params;   // çünkü id’yi direkt parametre olarak gönderdin
     const [item, setItem] = useState(null);
     const [offerVisible, setOfferVisible] = useState()
+
+    const currentUserEmail = getAuth().currentUser.email
 
     useEffect(() => {
         const ref = database().ref(`Vans/${id}`);  // ilgili id'nin datası
@@ -43,7 +46,15 @@ const VanDetails = ({ route }) => {
 
     return (
         <View>
-            <DetailsCard title={item.title} price={item.price} photos={item.photos} press={handleInputToggle} />
+            {/* <DetailsCard title={item.title} price={item.price} photos={item.photos} press={handleInputToggle} /> */}
+            <DetailsCard details={item} press={handleInputToggle} />
+            {/* {
+                item.email == currentUserEmail ? (
+                    ""
+                ) : (
+                    <Button title={"Teklif ver"}/>
+                )
+            } */}
             <OfferModal
                 visible={offerVisible}
                 onClose={handleInputToggle}

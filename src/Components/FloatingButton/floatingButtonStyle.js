@@ -14,14 +14,14 @@ export default StyleSheet.create({
         // color : "green",
         backgroundColor: "green",
         backgroundColor: 'rgba(74, 144, 226, 1)',
-              borderRightWidth: 3,
-                     borderBottomWidth: 3,
+        borderRightWidth: 3,
+        borderBottomWidth: 3,
 
         zIndex: 9999,
         elevation: 10,
-        
+
     },
 
-    
+
 
 })

@@ -2,14 +2,14 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
     container : {
-        backgroundColor : "white",
+        // backgroundColor : "white",
         textAlign : "center",
-        borderWidth : 1,
-        borderRadius : 25,
+        // borderWidth : 1,
+        borderRadius : 35,
         // borderColor : "grey",
         borderColor : "#e6edf8",
         padding : 13,
-        margin : 5
+        margin : 5,
     },
 
     image : {

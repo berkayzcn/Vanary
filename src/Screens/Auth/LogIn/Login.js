@@ -15,6 +15,13 @@ function LogIn({ navigation }) {
     const [password, setPassword] = useState()
 
     async function SignIn() {
+        if (!email || !password) {
+            showMessage({
+                message: "Eksik yada hatalı giriş yaptınız",
+                type: "danger"
+            })
+            return
+        }
         await signInWithEmailAndPassword(getAuth(), email, password)
         navigation.navigate('MainTabs')
     }

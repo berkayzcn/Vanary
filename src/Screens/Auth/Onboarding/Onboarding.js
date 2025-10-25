@@ -12,7 +12,7 @@ GoogleSignin.configure({
 });
 
 function Onboarding({ navigation }) {
-    const fadeAnim = useRef(new Animated.Value(0)).current;
+    const fadeAnim = useRef(new Animated.Value(0)).current;//0 tamamen gorunmez
     const fadeAnim2 = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {

@@ -4,11 +4,13 @@ import { useEffect } from "react";
 
 function ProfileCard({ item }) {
 
-    const userName = item ? item.email.split("@")[0] : "misafir"
-    
+    // const userName = item ? item.email.split("@")[0] : "misafir"
+
+    const displayName = item ? item.displayName : ""
+
 
     // useEffect(() =>{
-        
+
     // })
 
     return (
@@ -18,9 +20,11 @@ function ProfileCard({ item }) {
                 source={require("./../../Assets/profile.jpg")}
                 style={style.image}
             />
-            <Text>{userName}</Text>
-            {/* <Text>{item.displayName()}</Text> */}
-            <Text>{item.email}</Text>
+            <View style={{paddingLeft : 12}}>
+                {/* <Text>{userName}</Text> */}
+                <Text style={style.username}>{displayName}</Text>
+                <Text style={style.email}>{item.email}</Text>
+            </View>
 
         </View>
     )

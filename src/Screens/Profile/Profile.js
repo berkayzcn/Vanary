@@ -82,12 +82,12 @@ function Profile() {
             // <TouchableOpacity onPress={() => navigation.navigate("VanDetails", item.id)}>
             <TouchableOpacity >
                 <Card
-                item={item}
-                edit={()=>openEditMdodal(item)}
-                 pressDelete={()=>deleteVan(item.id)}
-                    // photos={item.photos}
-                    // title={item.title}
-                    // price={item.price}
+                    item={item}
+                    edit={() => openEditMdodal(item)}
+                    pressDelete={() => deleteVan(item.id)}
+                // photos={item.photos}
+                // title={item.title}
+                // price={item.price}
                 // onpress={toDetails(item.id)}
                 />
             </TouchableOpacity>
@@ -99,36 +99,28 @@ function Profile() {
             // <TouchableOpacity onPress={() => navigation.navigate("VanDetails", item.id)}>
             <TouchableOpacity >
                 <Card
-                    // photos={item.photos}
-                    // title={item.title}
-                    // price={item.price}
-                     item={item}
-                    
-                    // photos={item.photos}
-                    // title={item.title}
-                    // price={item.price}
-                // onpress={toDetails(item.id)}
+                    item={item}
                 />
             </TouchableOpacity>
         )
     }
 
-    
 
-    function updateVan (vanId, vanText, vanPrice) {
+
+    function updateVan(vanId, vanText, vanPrice) {
         database().ref(`Vans/${vanId}`).update({
             // newprice : vanPrice,
             // newtitle : vanText
             //databasede kayıtlı olan isimle kaydetmezsen yeni bir obje oluşturur
             //fakat aynı isimde kayıt aşlırsan olanı güncellerr
-            title : vanText,
-            price : vanPrice
+            title: vanText,
+            price: vanPrice
         })
         setEditModalVisible(false)
     }
 
 
-    function deleteVan (vanId) {
+    function deleteVan(vanId) {
         database().ref(`Vans/${vanId}`).remove()
     }
 
@@ -136,13 +128,18 @@ function Profile() {
     return (
         <View>
             <ProfileCard item={currentUser} />
-            <Text>Vanlarım</Text>
+             <Text
+            style={{
+                marginLeft : 13,
+                // fontWeight
+            }}
+            >Vanlarım</Text> 
             <FlatList
                 data={vans}
                 renderItem={renderVans}
             />
 
-            <Text>Teklif Verdiklerim</Text>
+            <Text style={{fontSize : 103}}>Teklif Verdiklerim</Text>
 
             <FlatList
                 data={sentOffers}
@@ -151,10 +148,9 @@ function Profile() {
 
             <VanEditModal
                 visible={editModalVisible}
-                oncClose={()=> setEditModalVisible(false)}
+                oncClose={() => setEditModalVisible(false)}
                 van={selectedVan}
                 send={updateVan}
-                
             />
 
         </View>

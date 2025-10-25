@@ -47,6 +47,9 @@
 	 <string>MaterialCommunityIcons.ttf</string>
 	 <string>MaterialIcons.ttf</string>
   	 <string>Fontisto.ttf</string>
+  	 <string>SimpleLineIcons.ttf</string>
+  	 <string>FontAwesome.ttf</string>
+	 <string>MaterialDesignIcons.ttf</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
