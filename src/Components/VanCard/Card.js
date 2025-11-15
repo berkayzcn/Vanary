@@ -59,26 +59,26 @@ function Card({ item, edit, pressDelete }) {
         flexDirection: "row",
         marginTop: 4
       }}>
-        <View style={{flexDirection : "row", marginRight : 7}}>
+        <View style={{ flexDirection: "row", marginRight: 7 }}>
           <Icon name="bed" size="19" color="#8792ad" />
-          <Text style={{ color: "#8792ad", marginLeft : 2 }}>4</Text>
+          <Text style={{ color: "#8792ad", marginLeft: 2 }}>4</Text>
         </View>
 
-        <View style={{flexDirection : "row"}}>
+        <View style={{ flexDirection: "row" }}>
           <SimpleLineIcons name="location-pin" size="17" color="#8792ad" />
-          <Text style={{marginLeft :3, color: "#8792ad" }}>Ilford</Text>
+          <Text style={{ marginLeft: 3, color: "#8792ad" }}>Ilford</Text>
         </View>
       </View>
 
       <View style={{ flexDirection: "row", marginVertical: 5 }}>
         <Icon name="star" size="17" color="#ffbd12" />
         <Text>4.5</Text>
-        <Text style={{ color: "#8792ad",  color: "#8792ad" }}>(140 review)</Text>
+        <Text style={{ color: "#8792ad", color: "#8792ad" }}>(140 review)</Text>
       </View>
 
       <View style={CardStyle.details}>
 
-        <Text style={{color : "#2952cb", fontSize : 15}}>From </Text>
+        <Text style={{ color: "#2952cb", fontSize: 15 }}>From </Text>
         <Text
           style={
             {
@@ -89,7 +89,7 @@ function Card({ item, edit, pressDelete }) {
             }}
         >{item.price}</Text>
 
-        <Text style={{color : "#2952cb", fontSize : 15}}> per day</Text>
+        <Text style={{ color: "#2952cb", fontSize: 15 }}> per day</Text>
       </View>
 
 
@@ -97,12 +97,18 @@ function Card({ item, edit, pressDelete }) {
       {
         currentUser.email == item.email ? (
           <>
-            <TouchableOpacity onPress={edit}>
-              <Text>Edit</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={pressDelete}>
-              <Text>Delete</Text>
-            </TouchableOpacity>
+            {/* <TouchableOpacity onPress={'edit'}> */}
+            <View style={{flexDirection : 'row'}}>
+
+              <Icon name="edit" size="19" color="#8792ad" onPress={edit} />
+              {/* <Text>Edit</Text> */}
+              {/* </TouchableOpacity>
+            <TouchableOpacity onPress={pressDelete}> */}
+              {/* <Text>Delete</Text> */}
+              <Icon name="delete" size="19" color="#8792ad" onPress={pressDelete} />
+
+            </View>
+            {/* </TouchableOpacity> */}
           </>
         ) : (
           ""

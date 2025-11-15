@@ -12,7 +12,9 @@ export default StyleSheet.create({
         borderColor : "gray",
         flexDirection : "row",
         borderRadius : 16,
-        backgroundColor : "#5d85ee"
+          backgroundColor : "#5d85ee",
+        //  backgroundColor : "",
+        borderColor : 'grey'
     },
 
     image : {
@@ -29,7 +31,7 @@ export default StyleSheet.create({
     },
 
     email : {
-        color : "white",
+         color : "white",
         fontWeight : 200
     }
 })

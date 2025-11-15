@@ -8,13 +8,17 @@ import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithCredential } from '@react-native-firebase/auth';
 import { appleAuth, AppleButton } from "@invertase/react-native-apple-authentication";
 import { showMessage, hide } from "react-native-flash-message";
+import Loading from "../../../Components/Loading";
 
 function LogIn({ navigation }) {
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
+    
+
     async function SignIn() {
+        setLoading(true)
         if (!email || !password) {
             showMessage({
                 message: "Eksik yada hatalı giriş yaptınız",
@@ -26,6 +30,7 @@ function LogIn({ navigation }) {
         navigation.navigate('MainTabs')
     }
 
+  
 
     const onGoogleButtonPress = async () => {
 

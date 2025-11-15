@@ -9,7 +9,7 @@ export default StyleSheet.create({
         // borderTopLeftRadius: 10,
         // borderTopRightRadius: 10,
         borderRadius : 10,
-        height: deviceSize.height / 2,
+        height: deviceSize.height / 1.3,
         position : "static"
     },
 

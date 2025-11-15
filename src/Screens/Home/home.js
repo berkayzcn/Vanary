@@ -9,33 +9,50 @@ import storage from '@react-native-firebase/storage';
 import { getAuth } from "@react-native-firebase/auth";
 import Icon from "react-native-vector-icons/MaterialIcons"
 import styles from "./homeStyle"
+import Loading from "../../Components/Loading";
 
 function Home({ navigation }) {
 
     const [inputModalVisible, setInputModalVisible] = useState()
     const [vans, setVans] = useState();
+    const [loading, setLoading] = useState(false)
 
     const userEmail = getAuth().currentUser.email
     // const userName = getAuth().currentUser.displayName
 
     useEffect(() => {
-        const vansRef = database().ref('Vans')
 
-        const onValueChange = vansRef.on('value', snapshot => {
-            const contentData = snapshot.val();
-            if (contentData) {
-                console.log("Bu ilk şekli", contentData)
-                const parsedData = useParseData(contentData)
-                console.log("Parse edilmiş", parsedData)
+        setLoading(true)
 
-                setVans(parsedData)
-            } else {
-                console.log("Henüz veri yok")
-            }
+        setTimeout(async () => {
+            const vansRef = database().ref('Vans')
+            const onValueChange = vansRef.on('value', snapshot => {
+                const contentData = snapshot.val();
+                if (contentData) {
+                    console.log("Bu ilk şekli", contentData)
+                    const parsedData = useParseData(contentData)
+                    console.log("Parse edilmiş", parsedData)
 
+                    setVans(parsedData)
+                } else {
+                    console.log("Henüz veri yok")
+                }
 
-        })
+                setLoading(false)
+            })
+        }, 4000)
+
     }, [])
+
+    if (loading) {
+        return (
+
+            <View style={styles.lottieContainer}>
+                <Loading />
+            </View>
+        )
+
+    }
 
     function handleInputToggle() {
         setInputModalVisible(!inputModalVisible)
@@ -88,7 +105,7 @@ function Home({ navigation }) {
             flex: 1,
             //  marginHorizontal: 18,
             backgroundColor: "white",
-            
+
         }}>
             {/* <Icon
                 name="logout"
@@ -100,7 +117,7 @@ function Home({ navigation }) {
 
             <View style={{ top: 11 }}>
 
-                <View style={{flexDirection : "row"}}>
+                <View style={{ flexDirection: "row" }}>
                     <View>
                         <View style={{
                             flexDirection: "row", alignItems: "center",
@@ -127,7 +144,7 @@ function Home({ navigation }) {
                         >London, UK</Text>
                     </View>
 
-                    <Icon name="search" size={22} style={{top : 13, left : 190}}/>
+                    <Icon name="search" size={22} style={{ top: 13, left: 190 }} />
 
                 </View>
 
@@ -143,10 +160,11 @@ function Home({ navigation }) {
                     onSend={vanSave}
                 />
             </View>
-             <FloatingButton icon={"plus"} onPress={handleInputToggle} /> 
+            {/* <FloatingButton icon={"plus"} onPress={handleInputToggle} /> */}
         </SafeAreaView>
     )
 }
 
 export default Home
+
 

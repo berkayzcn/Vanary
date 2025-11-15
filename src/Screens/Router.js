@@ -15,6 +15,9 @@ import Button from '../Components/Button';
 import VanDetails from './VanDetails';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import FlashMessage from "react-native-flash-message";
+import LinearGradient from 'react-native-linear-gradient';
+import Loading from '../Components/Loading';
+import SplashScreen from '../Components/SplashScreen';
 
 function App() {
 
@@ -22,6 +25,7 @@ function App() {
   const Tab = createBottomTabNavigator()
 
   const [userSession, setUserSession] = useState()
+  const [loading, setLoading] = useState(false)
 
 
   useEffect(() => {
@@ -32,9 +36,24 @@ function App() {
   }, [])
 
   async function signOut() {
-    await getAuth().signOut()
-    await GoogleSignin.signOut()
+    setLoading(true)
+    setTimeout(async () => {
+      await getAuth().signOut();
+      await GoogleSignin.signOut();
+      setLoading(false);
+    }, 3000);
   }
+
+
+  if (loading) {
+    return (
+      <Loading />
+    )
+  }
+  // function singOut(){
+  //   setLoading(true)
+
+  // }
 
 
   function MainTabs() {
@@ -58,9 +77,10 @@ function App() {
           tabBarInactiveTintColor: 'gray', // pasif ikon rengi
           tabBarStyle: {
             backgroundColor: '#fff',
-            height: 70,
+            height: 79,
             //borderTopWidth: 0,
             elevation: 5,
+            paddingTop: 7
           },
           headerShown: true,
         })}
@@ -72,15 +92,15 @@ function App() {
             // headerShown : false,
             headerRight: () => (
               <Icon
-              name="logout"
-              size = {26}
-              style={{marginRight : 7}}
-              onPress = {() => getAuth().signOut()}
+                name="logout"
+                size={26}
+                style={{ marginRight: 7 }}
+                onPress={() => getAuth().signOut()}
               />
 
             ),
             title: "",
-            headerShown : false
+            headerShown: false
 
           }}
 
@@ -96,23 +116,35 @@ function App() {
                 style={styles.centerButton}
                 onPress={() => console.log('Orta butona tıklandı')}
               >
-                <View style={styles.centerButtonInner}>
+                <LinearGradient
+                  // colors={['#199970', '#455D64', '#8E96E9']}
+                  // start={{ x: 0, y: 0 }}
+                  // end={{ x: 1, y: 1 }}
+                  colors={["#6A8DFF", "#4666FF"]} // mavi-mor geçiş
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  style={styles.gradient}
+                >
+
+                  {/* <View style={styles.centerButtonInner}> */}
                   <Icon name="add" size={30} color="#fff" />
-                </View>
+                  {/* </View> */}
+                </LinearGradient>
               </TouchableOpacity>
             ),
           }}
         />
 
-        <Tab.Screen name='Profile' component={Profile} 
-        options={{
+        <Tab.Screen name='Profile' component={Profile}
+          options={{
             // headerShown : false,
             headerRight: () => (
               <Icon
-              name="logout"
-              size = {26}
-              style={{marginRight : 7}}
-              onPress = {() => getAuth().signOut()}
+                name="logout"
+                size={26}
+                style={{ marginRight: 7 }}
+                // onPress={() => getAuth().signOut()}
+                onPress={signOut}
               />
 
             ),
@@ -129,6 +161,13 @@ function App() {
     return (
       <Stack.Navigator>
 
+        <Stack.Screen
+          name='SplashScreen'
+          component={SplashScreen}
+          options={{
+            headerShown: false
+          }}
+        />
         <Stack.Screen
           name='Onboarding'
           component={Onboarding}
@@ -199,10 +238,10 @@ function App() {
           )
         }
 
-        <Stack.Screen name='VanDetails' component={VanDetails} 
-        options={{
-          headerTitle : "Details",
-          headerBackTitle : "",
+        <Stack.Screen name='VanDetails' component={VanDetails}
+          options={{
+            headerTitle: "Details",
+            headerBackTitle: "",
             headerBackImage: ({ tintColor }) => (
               <Icon
                 name="arrow-back-ios-new"
@@ -211,7 +250,7 @@ function App() {
                 style={{ marginLeft: 22 }} // buradan padding/margin ayarlıyorsun
               />
             ),
-        }}
+          }}
         />
       </Stack.Navigator>
       <FlashMessage position={"top"} />
@@ -225,23 +264,36 @@ export default App;
 
 
 const styles = StyleSheet.create({
-    centerButton: {
+  centerButton: {
     top: -25, // butonu yukarı taşır (yarısı dışarıda)
     justifyContent: 'center',
     alignItems: 'center',
+
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.45,
+    shadowRadius: 6,
   },
   centerButtonInner: {
     width: 55,
     height: 55,
     borderRadius: 21,
     // backgroundColor: '#192252',
-        backgroundColor: 'rgba(74, 144, 226, 1)',
+    // backgroundColor: 'rgba(74, 144, 226, 1)',
 
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 6,
-      borderRightWidth: 3,
-        borderBottomWidth: 3,
+    borderRightWidth: 3,
+    borderBottomWidth: 3,
     // shadowOpacity : 1
+  },
+
+  gradient: {
+    width: 60,
+    height: 60,
+    borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 })

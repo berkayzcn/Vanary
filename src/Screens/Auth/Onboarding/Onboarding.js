@@ -5,7 +5,7 @@ import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { GoogleAuthProvider, getAuth, signInWithCredential } from '@react-native-firebase/auth';
 import { appleAuth, AppleButton } from "@invertase/react-native-apple-authentication";
 import Button2 from "../../../Components/Button2";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 GoogleSignin.configure({
     webClientId: '668372703910-gff6ttlvthrabveupuh0iccc5e2sn67p.apps.googleusercontent.com', // Firebase Console → Authentication → Sign-in method → Google → Web client ID
@@ -14,6 +14,8 @@ GoogleSignin.configure({
 function Onboarding({ navigation }) {
     const fadeAnim = useRef(new Animated.Value(0)).current;//0 tamamen gorunmez
     const fadeAnim2 = useRef(new Animated.Value(0)).current;
+
+    // const [loading, setLoading] = useState()
 
     useEffect(() => {
         Animated.timing(fadeAnim, {

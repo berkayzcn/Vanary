@@ -20,7 +20,17 @@ export default StyleSheet.create({
         zIndex: 9999,
         elevation: 10,
 
+         overflow: 'hidden',
+
     },
+
+     gradient: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
 
 
